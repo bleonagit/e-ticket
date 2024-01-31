@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Schema
+@Builder
 public class TicketUpdateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

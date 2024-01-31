@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString(exclude = {"laws"})
 @EqualsAndHashCode(exclude = {"laws"})
+@Builder
 public class Ticket implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

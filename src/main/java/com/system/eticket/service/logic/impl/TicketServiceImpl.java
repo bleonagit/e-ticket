@@ -77,7 +77,6 @@ public class TicketServiceImpl implements TicketService {
                 ticket.setLaws(laws);
             }
             ticket.setSerialNumber(UUID.randomUUID().toString());
-            ticket.setTicketDate(newTicket.getTicketDate());
             ticket.setCreatedDate(ZonedDateTime.now());
             Ticket saved = ticketRepository.saveAndFlush(ticket);
             log.info("TicketServiceImpl::Created new ticket!");
