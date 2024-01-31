@@ -1,6 +1,5 @@
 package com.system.eticket.model.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.io.Serial;

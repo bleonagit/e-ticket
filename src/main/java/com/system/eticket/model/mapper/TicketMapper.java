@@ -2,7 +2,6 @@ package com.system.eticket.model.mapper;
 
 import com.system.eticket.model.dto.TicketRequest;
 import com.system.eticket.model.dto.TicketResponse;
-import com.system.eticket.model.dto.TicketUpdateRequest;
 import com.system.eticket.model.entity.Ticket;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,15 +15,6 @@ public abstract class TicketMapper {
             @Mapping(target = "laws", ignore = true)
     })
     public abstract Ticket toTicket(TicketRequest ticketRequest);
-//
-//    @Mappings({
-//            @Mapping(target = "official", ignore = true),
-//            @Mapping(target = "invoice", ignore = true),
-//            @Mapping(target = "laws", ignore = true)
-//    })
-//    public abstract Ticket toTicket(TicketUpdateRequest ticketUpdateRequest);
-//
-//    public abstract Ticket toTicket(TicketResponse ticketResponse);
 
     public abstract TicketResponse toTicketResponse(Ticket ticket);
 }

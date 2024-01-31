@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"tickets"})
+@ToString
 public class OfficialRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

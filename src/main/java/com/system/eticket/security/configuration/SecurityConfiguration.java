@@ -5,7 +5,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import com.system.eticket.security.JwtAuthenticationFilter;
 import com.system.eticket.service.security.UserService;
 import jakarta.annotation.Resource;
-import lombok.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
