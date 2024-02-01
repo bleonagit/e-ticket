@@ -29,8 +29,8 @@ public class LawServiceImpl implements LawService {
             }
             return laws.get();
         } catch (EntityNotFoundException exception){
-            log.error("No Law with these ids exist");
-            throw new EntityNotFoundException("No Law with these ids exist");
+            log.error("No Law with ids {} exist", ids);
+            throw new EntityNotFoundException("No Law with these ids " + ids + " exist");
         }
     }
 }

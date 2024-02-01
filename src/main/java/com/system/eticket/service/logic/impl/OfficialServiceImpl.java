@@ -22,7 +22,7 @@ public class OfficialServiceImpl implements OfficialService {
             return officialRepository.findByCode(code).orElseThrow(EntityNotFoundException::new);
         } catch (EntityNotFoundException exception){
             log.error("Official with code {} was not found", code);
-            throw new EntityNotFoundException("Official with code not found!");
+            throw new EntityNotFoundException("Official with code " + code + " was not found!");
         }
     }
 }

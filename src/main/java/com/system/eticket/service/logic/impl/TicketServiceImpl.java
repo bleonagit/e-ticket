@@ -142,7 +142,7 @@ public class TicketServiceImpl implements TicketService {
             return ticketMapper.toTicketResponse(ticket);
         } catch (EntityNotFoundException exception){
             log.error("TicketServiceImpl::Ticket with serial number {} was not found", serialNumber);
-            throw new EntityNotFoundException("Ticket with serial number not found!");
+            throw new EntityNotFoundException("Ticket with serial number " + serialNumber + " was not found!", exception);
         }
     }
 
@@ -150,7 +150,7 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public InvoiceResponse payTicket(String serialNumber, double amount) throws EntityNotFoundException, IllegalArgumentException{
         try {
-            Ticket ticket = ticketRepository.getTicketBySerialNumber(serialNumber).orElseThrow(() -> new EntityNotFoundException("Ticket with serial number was not found!"));
+            Ticket ticket = ticketRepository.getTicketBySerialNumber(serialNumber).orElseThrow(() -> new EntityNotFoundException("Ticket with serial number " + serialNumber + " was not found!"));
             boolean isPaid = invoiceService.isPaidTicket(ticket);
             if(isPaid){
                 log.info("TicketServiceImpl::Ticket was already paid!");
@@ -169,8 +169,8 @@ public class TicketServiceImpl implements TicketService {
                 amountToPay = ticket.getAmount() + actualDifferenceInDays * fee * ticket.getAmount() / 100;
             }
             if(amount != amountToPay){
-                log.error("TicketServiceImpl::Your deposit amount is not {}. Please pay this exact amount!", amountToPay);
-                throw new IllegalArgumentException("The given amount is not the required one: " + amountToPay);
+                log.error("TicketServiceImpl::Ticket with serial number {} has an amount of {}. You tried to deposit {}!", serialNumber, amountToPay, amount);
+                throw new IllegalArgumentException("Ticket with serial number " + serialNumber + " has an amount of " + amountToPay + ". You tried to deposit " + amount);
             }
             newInvoice.setCreatedDate(Timestamp.from(Instant.now()));
             newInvoice.setPayedAmount(amount);

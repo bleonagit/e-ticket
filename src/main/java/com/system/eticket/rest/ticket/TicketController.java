@@ -25,6 +25,7 @@ public class TicketController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ticket created successfully!"),
             @ApiResponse(responseCode = "403", description = "Unauthorized, please Sign in!"),
+            @ApiResponse(responseCode = "404", description = "Not Found!"),
             @ApiResponse(responseCode = "500", description = "Internal server error!")
     })
     public ResponseEntity<TicketResponse> createTicket(@RequestBody TicketRequest newTicket) throws EntityNotFoundException{
@@ -36,10 +37,12 @@ public class TicketController {
     @Operation(summary = "Update ticket", description = "Update ticket")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ticket updated successfully!"),
+            @ApiResponse(responseCode = "400", description = "Bad request!"),
             @ApiResponse(responseCode = "403", description = "Unauthorized, please Sign in!"),
+            @ApiResponse(responseCode = "404", description = "Not Found!"),
             @ApiResponse(responseCode = "500", description = "Internal server error!")
     })
-    public ResponseEntity<TicketResponse> updateTicket(@RequestBody TicketUpdateRequest newTicket) throws EntityNotFoundException{
+    public ResponseEntity<TicketResponse> updateTicket(@RequestBody TicketUpdateRequest newTicket) throws EntityNotFoundException, IllegalArgumentException{
         TicketResponse response = ticketService.updateTicket(newTicket);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -49,9 +52,10 @@ public class TicketController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ticket read successfully!"),
             @ApiResponse(responseCode = "403", description = "Unauthorized, please Sign in!"),
+            @ApiResponse(responseCode = "404", description = "Not Found!"),
             @ApiResponse(responseCode = "500", description = "Internal server error!")
     })
-    public ResponseEntity<TicketResponse> getTicketBySerialNumber(@RequestParam String serialNumber) throws EntityNotFoundException {
+    public ResponseEntity<TicketResponse> getTicketBySerialNumber(@RequestParam String serialNumber) throws EntityNotFoundException{
         TicketResponse response = ticketService.getTicketBySerialNumber(serialNumber);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -61,6 +65,7 @@ public class TicketController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ticket paid successfully!"),
             @ApiResponse(responseCode = "403", description = "Unauthorized, please Sign in!"),
+            @ApiResponse(responseCode = "404", description = "Not Found!"),
             @ApiResponse(responseCode = "500", description = "Internal server error!")
     })
     public ResponseEntity<InvoiceResponse> payTicket(@RequestParam(name = "serialNumber") String serialNumber, @RequestParam(name = "amount") double amount) throws EntityNotFoundException{
